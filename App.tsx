@@ -1,13 +1,13 @@
 
-import React, { useState, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, RotateCcw, Loader2, CheckCircle2, Menu, RefreshCw, XCircle, CheckCircle, Phone, MapPin, Star, ShieldCheck, Globe, Navigation, Share2, Camera, Info, MessageSquare } from 'lucide-react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, RotateCcw, Loader2, CheckCircle2, Menu, RefreshCw, XCircle, CheckCircle, Phone, MapPin, Star, ShieldCheck, Globe, Navigation, Share2, Camera, MessageSquare, ArrowRight, Zap, ExternalLink } from 'lucide-react';
 import { STEPS, THEME } from './constants';
 import { FormData, LeadPayload } from './types';
 
 const SkippLogo = () => (
-  <div className="flex flex-col items-center justify-center mb-6 w-full max-w-[320px] mx-auto scale-100">
+  <div className="flex flex-col items-center justify-center mb-4 w-full max-w-[320px] mx-auto scale-90 sm:scale-100">
     <div className="flex items-center gap-4">
-      <svg width="120" height="100" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
+      <svg width="80" height="64" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
         <defs>
           <linearGradient id="logoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#A020F0" />
@@ -39,14 +39,14 @@ const SkippLogo = () => (
         />
       </svg>
       <div className="flex flex-col leading-none">
-        <span className="text-4xl font-black italic tracking-tighter" style={{ 
+        <span className="text-2xl sm:text-3xl font-black italic tracking-tighter" style={{ 
           background: 'linear-gradient(to bottom, #A020F0, #3B82F6)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}>
           Skipp
         </span>
-        <span className="text-3xl font-bold text-[#0B0B0B] -mt-1 tracking-tight">
+        <span className="text-xl sm:text-2xl font-bold text-[#0B0B0B] -mt-1 tracking-tight">
           Digital
         </span>
       </div>
@@ -55,59 +55,46 @@ const SkippLogo = () => (
 );
 
 const BrowserMockup = () => (
-  <div className="w-full mt-6 bg-white rounded-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden text-left animate-fade-in">
-    <div className="bg-[#F5F5F7] px-4 py-2.5 flex items-center justify-between border-b border-gray-200">
-      <span className="text-[10px] font-bold text-gray-400">OK</span>
-      <div className="flex-1 mx-3 bg-white rounded-full py-1 px-3 border border-gray-200 flex items-center gap-1.5 overflow-hidden">
-        <div className="w-2 h-2 rounded-full bg-[#2FBBA8]" />
-        <span className="text-[10px] text-gray-500 font-medium truncate">business.google.com</span>
+  <div className="w-full mt-4 bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden text-left animate-slide-up">
+    <div className="bg-[#F9FAFB] px-4 py-2 flex items-center justify-between border-b border-gray-200">
+      <div className="flex gap-1.5">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-400/30" />
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/30" />
+        <div className="w-2.5 h-2.5 rounded-full bg-green-400/30" />
       </div>
-      <div className="flex items-center gap-3">
-        <Menu size={14} className="text-gray-400" />
-        <RefreshCw size={12} className="text-gray-400" />
+      <div className="flex-1 mx-4 bg-white rounded-full py-1 px-3 border border-gray-100 flex items-center gap-1.5 shadow-inner">
+        <ShieldCheck size={10} className="text-green-500" />
+        <span className="text-[9px] text-gray-400 font-medium">business.google.com</span>
       </div>
+      <Menu size={12} className="text-gray-300" />
     </div>
-    <div className="p-6">
-      <div className="flex items-center gap-1 mb-4">
-        <span className="text-xs font-bold text-black">Think with Google</span>
-        <span className="text-[8px] text-gray-400">▼</span>
+    <div className="p-4 sm:p-6">
+      <div className="inline-flex items-center gap-1.5 bg-blue-50 px-2 py-1 rounded-md mb-3">
+        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+        <span className="text-[10px] font-bold text-blue-600 tracking-tight">Insights Google 2024</span>
       </div>
-      <p className="text-xs text-gray-600 leading-relaxed font-sans-regular">
-        No Brasil, o uso do digital tem crescido significativamente.{' '}
-        <span className="text-[#2FBBA8] font-bold">91% das buscas</span>{' '}
-        relacionadas a serviços e produtos{' '}
-        <span className="text-[#2FBBA8] font-bold">acontecem antes mesmo de as pessoas irem à empresa</span>. 
-        Isso significa que o futuro do setor tende a ser mais online. 
-        A pergunta que fica é: a sua empresa está pronta para navegar neste contexto?
+      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans-regular">
+        No Brasil, o uso do digital explodiu.{' '}
+        <span className="text-[#2FBBA8] font-black">91% das buscas</span>{' '}
+        ocorrem antes da compra física.{' '}
+        <span className="text-gray-900 font-bold">A sua empresa é a primeira opção que eles encontram?</span>
       </p>
     </div>
   </div>
 );
 
-const MiniMap = () => (
-  <div className="relative w-full h-full bg-[#E5E7EB] overflow-hidden">
-    {/* Stylized Map Roads */}
+const MiniMap = ({ faded = false }) => (
+  <div className={`relative w-full h-full ${faded ? 'bg-gray-100' : 'bg-[#E5E7EB]'} overflow-hidden`}>
     <div className="absolute inset-0">
-      <div className="absolute top-1/4 left-0 w-full h-[3px] bg-white rotate-12" />
-      <div className="absolute top-1/2 left-0 w-full h-[5px] bg-white -rotate-6" />
-      <div className="absolute top-0 left-1/3 w-[4px] h-full bg-white rotate-3" />
-      <div className="absolute top-0 right-1/4 w-[3px] h-full bg-white -rotate-12" />
-      
-      {/* Green patches */}
-      <div className="absolute top-4 left-6 w-8 h-8 bg-green-100/40 rounded-full blur-xl" />
-      <div className="absolute bottom-4 right-6 w-12 h-12 bg-green-100/40 rounded-full blur-xl" />
+      <div className={`absolute top-1/4 left-0 w-full h-[3px] bg-white rotate-12 ${faded ? 'opacity-40' : ''}`} />
+      <div className={`absolute top-1/2 left-0 w-full h-[5px] bg-white -rotate-6 ${faded ? 'opacity-40' : ''}`} />
+      <div className={`absolute top-0 left-1/3 w-[4px] h-full bg-white rotate-3 ${faded ? 'opacity-40' : ''}`} />
+      <div className={`absolute top-4 left-6 w-8 h-8 ${faded ? 'bg-gray-200' : 'bg-green-100/40'} rounded-full blur-xl`} />
     </div>
-
-    {/* Map Pin */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-      <div className="relative">
-        <MapPin size={18} className="text-red-500 fill-red-500 drop-shadow-md animate-bounce" />
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-0.5 bg-black/10 rounded-full blur-[1px]" />
-      </div>
+      <MapPin size={20} className={`${faded ? 'text-gray-300' : 'text-red-500 fill-red-500'} drop-shadow-lg ${!faded && 'animate-bounce'}`} />
     </div>
-
-    {/* Google Logo Shadow */}
-    <div className="absolute bottom-1 left-1 opacity-20 text-[6px] font-black italic text-gray-400">Google</div>
+    <div className="absolute bottom-1 left-2 opacity-30 text-[7px] font-black italic text-gray-500">Maps</div>
   </div>
 );
 
@@ -122,115 +109,117 @@ const HighFidelityComparison = () => {
   const VERDE_CHECK = '#22C55E'; 
 
   return (
-    <div className="w-full space-y-8 animate-fade-in px-2">
-      <div className="flex justify-between items-start gap-4 pt-4">
-        {/* Antes */}
+    <div className="w-full space-y-6 animate-fade-in px-2">
+      <div className="flex justify-between items-start gap-4 pt-2">
+        {/* Antes - Quadrado Vermelho/Apagado */}
         <div className="flex-1 flex flex-col items-center">
-          <XCircle size={28} className="text-red-400 mb-2" fill="white" />
-          <span className="text-sm font-black text-gray-400 mb-4 uppercase">Antes</span>
-          <div className="relative w-full max-w-[130px] aspect-[9/18.5] bg-[#F9FAFB] rounded-[24px] border-[4px] border-[#E5E7EB] shadow-inner overflow-hidden p-2">
-            <div className="w-full h-full bg-white rounded-xl shadow-sm p-1.5 flex flex-col gap-2 opacity-30 grayscale">
-               <div className="h-2 w-12 bg-gray-200 rounded" />
-               <div className="h-2 w-full bg-gray-100 rounded" />
-               <div className="h-16 w-full bg-gray-50 rounded" />
-               <div className="mt-auto h-4 w-full bg-gray-100 rounded" />
+          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center mb-2 opacity-50">
+            <XCircle size={20} className="text-red-400" />
+          </div>
+          <span className="text-[9px] font-black text-gray-400 mb-3 uppercase tracking-widest">Antes</span>
+          <div className="relative w-full max-w-[120px] aspect-[9/18.5] bg-[#F3F4F6] rounded-[24px] border-[4px] border-gray-200 shadow-sm overflow-hidden p-1.5 opacity-50 filter grayscale-[0.8]">
+            <div className="w-full h-full bg-white rounded-[18px] shadow-sm flex flex-col overflow-hidden">
+               {/* Cabeçalho Apagado */}
+               <div className="h-14 w-full bg-gray-100 relative overflow-hidden flex flex-col justify-end p-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="relative z-10 text-left">
+                    <div className="h-1.5 w-14 bg-gray-300 rounded-[1px] mb-1" />
+                    <div className="flex items-center gap-0.5">
+                       <span className="text-[7px] font-bold text-gray-400">2.1</span>
+                       <div className="flex gap-0.2">
+                          <Star size={5} fill="#D1D5DB" color="#D1D5DB" />
+                          <Star size={5} fill="#D1D5DB" color="#D1D5DB" />
+                          <Star size={5} fill="#F3F4F6" color="#D1D5DB" />
+                       </div>
+                       <span className="text-[5px] text-gray-400 font-bold ml-0.5">(3)</span>
+                    </div>
+                  </div>
+               </div>
+               <div className="p-1 space-y-1.5">
+                  <div className="grid grid-cols-4 gap-1 py-1 border-b border-gray-50 opacity-40">
+                     {[Phone, Navigation, MessageSquare, Share2].map((Icon, i) => (
+                       <div key={i} className="flex flex-col items-center">
+                          <div className="w-3.5 h-3.5 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center">
+                             <Icon size={6} className="text-gray-300" />
+                          </div>
+                       </div>
+                     ))}
+                  </div>
+                  <div className="h-12 w-full rounded-lg border border-gray-50 relative overflow-hidden bg-gray-50">
+                     <MiniMap faded={true} />
+                  </div>
+               </div>
             </div>
           </div>
         </div>
 
         <div className="self-center pt-10">
-          <ChevronRight size={24} className="text-gray-300" />
+          <ArrowRight size={16} className="text-gray-200" />
         </div>
 
-        {/* Depois */}
+        {/* Depois - Quadrado Verde/Vivo */}
         <div className="flex-1 flex flex-col items-center">
-          <CheckCircle size={32} style={{ color: VERDE_CHECK }} className="mb-2" fill="white" />
-          <span className="text-sm font-black mb-4 uppercase" style={{ color: VERDE_CHECK }}>Depois</span>
+          <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center mb-2">
+            <CheckCircle size={20} style={{ color: VERDE_CHECK }} />
+          </div>
+          <span className="text-[9px] font-black mb-3 uppercase tracking-widest" style={{ color: VERDE_CHECK }}>Depois</span>
           <div 
-            className="relative w-full max-w-[135px] aspect-[9/18.5] bg-white rounded-[26px] border-[5px] shadow-2xl overflow-hidden p-1.5 transition-all duration-500 hover:scale-105"
+            className="relative w-full max-w-[125px] aspect-[9/18.5] bg-white rounded-[26px] border-[5px] shadow-2xl overflow-hidden p-1.5 transition-all duration-500 hover:scale-105"
             style={{ borderColor: VERDE_CHECK }}
           >
             <div className="w-full h-full bg-white rounded-[18px] shadow-sm flex flex-col overflow-hidden">
-               {/* Retangulo Roxo (Cabeçalho GMN) */}
-               <div className="h-16 w-full bg-[#6366F1]/10 relative overflow-hidden flex flex-col justify-end p-2">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  
-                  {/* Verified Badge & Camera */}
-                  <div className="absolute top-1.5 right-1.5 flex gap-1 items-center">
+               <div className="h-14 w-full bg-[#6366F1]/10 relative overflow-hidden flex flex-col justify-end p-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-1 right-1 flex gap-1 items-center">
                      <ShieldCheck size={10} className="text-blue-400 fill-white" />
-                     <Camera size={10} className="text-white drop-shadow" />
                   </div>
-
-                  {/* Business Name & Rating area (Demonstração Perfil GMN) */}
                   <div className="relative z-10 text-left">
-                    <div className="h-2 w-20 bg-white rounded-[1px] mb-1" />
+                    <div className="h-2 w-18 bg-white rounded-[1px] mb-1" />
                     <div className="flex items-center gap-0.5">
-                       <span className="text-[8px] font-black text-white">5.0</span>
+                       <span className="text-[7px] font-black text-white">5.0</span>
                        <div className="flex gap-0.2">
-                          {[1,2,3,4,5].map(i => <Star key={i} size={6} fill="#EAB308" color="#EAB308" />)}
+                          {[1,2,3,4,5].map(i => <Star key={i} size={5} fill="#EAB308" color="#EAB308" />)}
                        </div>
                        <span className="text-[5px] text-white/90 font-bold ml-0.5">(247)</span>
                     </div>
                   </div>
                </div>
-
-               <div className="p-1.5 space-y-2">
-                  {/* Action Grid */}
+               <div className="p-1 space-y-1.5">
                   <div className="grid grid-cols-4 gap-1 py-1 border-b border-gray-50">
-                     {[
-                       { icon: Phone, label: 'Ligar', active: true },
-                       { icon: Navigation, label: 'Rotas' },
-                       { icon: MessageSquare, label: 'Chat' },
-                       { icon: Share2, label: 'Partilha' }
-                     ].map((btn, i) => (
-                       <div key={i} className="flex flex-col items-center gap-0.5">
-                          <div className={`w-4.5 h-4.5 rounded-full flex items-center justify-center ${btn.active ? 'bg-[#2FBBA8] shadow-sm' : 'bg-gray-50 border border-gray-100'}`}>
-                             <btn.icon size={8} className={btn.active ? 'text-white' : 'text-gray-400'} />
+                     {[Phone, Navigation, MessageSquare, Share2].map((Icon, i) => (
+                       <div key={i} className="flex flex-col items-center">
+                          <div className={`w-4 h-4 rounded-full flex items-center justify-center ${i === 0 ? 'bg-[#2FBBA8]' : 'bg-gray-50 border border-gray-100'}`}>
+                             <Icon size={7} className={i === 0 ? 'text-white' : 'text-gray-400'} />
                           </div>
-                          <span className="text-[4px] font-bold text-gray-500">{btn.label}</span>
                        </div>
                      ))}
                   </div>
-
-                  {/* Retangulo Azul (Mini-mapa) */}
-                  <div className="h-14 w-full bg-gray-100 rounded-lg border border-gray-100 relative overflow-hidden shadow-inner group">
+                  <div className="h-10 w-full rounded-lg border border-gray-100 relative overflow-hidden shadow-inner">
                      <MiniMap />
                   </div>
 
-                  {/* Detalhes de Contato Simulado */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-1">
-                      <MapPin size={6} className="text-gray-400" />
-                      <div className="h-1 w-24 bg-gray-100 rounded-[1px]" />
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Globe size={6} className="text-gray-400" />
-                      <div className="h-1 w-16 bg-gray-100 rounded-[1px]" />
+                  {/* Links de Pesquisa do Google */}
+                  <div className="space-y-1 pt-0.5">
+                    <div className="flex flex-col gap-0.5 border-l-[1px] border-[#2FBBA8] pl-1">
+                      <p className="text-[4px] font-bold text-gray-800 leading-tight">Sua empresa em 1º lugar</p>
                     </div>
                   </div>
-               </div>
-               
-               <div className="mt-auto bg-[#F0FDF4] py-1 text-center border-t border-[#DCFCE7]">
-                  <span className="text-[5px] font-black tracking-widest uppercase" style={{ color: VERDE_CHECK }}>
-                    Destaque Máximo no Google
-                  </span>
                </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Comparison Text List */}
-      <div className="space-y-4 pt-4 px-2 pb-2">
+      <div className="space-y-3 pt-2 px-2">
         {items.map((item, idx) => (
-          <div key={idx} className="flex items-center justify-between gap-4 text-center">
-            <span className="flex-1 text-[11px] text-gray-400 font-medium leading-tight">{item.antes}</span>
-            <div className="flex-none flex items-center gap-1.5">
-               <div className="w-1.5 h-1.5 rounded-full bg-gray-200" />
+          <div key={idx} className="flex items-center justify-between gap-4">
+            <span className="flex-1 text-[10px] text-gray-400 font-medium text-left leading-tight">{item.antes}</span>
+            <div className="flex-none flex items-center gap-1">
+               <div className="w-1 h-1 rounded-full bg-gray-200" />
                <div className="w-4 h-[1px] bg-gray-100" />
-               <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: VERDE_CHECK }} />
+               <div className="w-1 h-1 rounded-full" style={{ backgroundColor: VERDE_CHECK }} />
             </div>
-            <span className="flex-1 text-[11px] text-black font-black leading-tight">{item.depois}</span>
+            <span className="flex-1 text-[10px] text-black font-black text-right leading-tight">{item.depois}</span>
           </div>
         ))}
       </div>
@@ -253,7 +242,6 @@ const App: React.FC = () => {
   const handleNext = useCallback(() => {
     if (currentStepIndex < STEPS.length - 1) {
       setCurrentStepIndex(prev => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setShowEmailStep(true);
     }
@@ -270,7 +258,7 @@ const App: React.FC = () => {
       setFormData(prev => ({ ...prev, [currentStep.id]: optionId }));
       setTimeout(() => {
         handleNext();
-      }, 300);
+      }, 400);
     }
   };
 
@@ -285,7 +273,6 @@ const App: React.FC = () => {
   const handleBack = () => {
     if (currentStepIndex > 0) {
       setCurrentStepIndex(prev => prev - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -301,24 +288,18 @@ const App: React.FC = () => {
   };
 
   const submitLead = async () => {
+    if (!email.includes('@')) {
+      setError('Por favor, insira um e-mail válido.');
+      return;
+    }
     setIsSubmitting(true);
     setError(null);
     
-    const payload: LeadPayload = {
-      timestamp: new Date().toISOString(),
-      source: 'anuncio',
-      device: window.innerWidth < 768 ? 'mobile' : 'desktop',
-      answers: { ...formData, email, name },
-      metadata: {
-        utm_source: new URLSearchParams(window.location.search).get('utm_source') || undefined
-      }
-    };
-
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       setIsSubmitted(true);
     } catch (err) {
-      setError('Ops — não conseguimos enviar seus dados agora. Tente novamente.');
+      setError('Erro ao enviar. Tente novamente em instantes.');
     } finally {
       setIsSubmitting(false);
     }
@@ -326,19 +307,21 @@ const App: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-8 text-center animate-fade-in">
+      <div className="h-screen h-[100dvh] bg-white flex flex-col items-center justify-center p-8 text-center animate-fade-in overflow-hidden">
         <div className="mb-6"><SkippLogo /></div>
-        <CheckCircle2 size={64} color={THEME.primary} className="mb-6" />
-        <h1 className="text-3xl font-bold mb-4">Obrigado!</h1>
-        <p className="text-lg text-[#6B6B6B] mb-8">
-          Recebemos suas informações. Em breve você receberá o seu guia no e-mail informado.
+        <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-6 shadow-sm border border-green-100">
+          <CheckCircle2 size={32} color={THEME.primary} />
+        </div>
+        <h1 className="text-2xl font-black mb-3 text-gray-900">Tudo Pronto!</h1>
+        <p className="text-base text-[#6B6B6B] mb-8 leading-relaxed">
+          O seu checklist exclusivo e o guia de otimização já foram enviados para o seu e-mail.
         </p>
         <button
           onClick={handleReset}
-          className="w-full max-w-xs py-4 px-6 rounded-full text-white font-bold shadow-lg transition-transform active:scale-95"
+          className="w-full max-w-xs py-4 px-8 rounded-2xl text-white font-black shadow-[0_10px_30px_rgba(47,187,168,0.3)] transition-all active:scale-95 flex items-center justify-center gap-2"
           style={{ backgroundColor: THEME.primary }}
         >
-          Voltar ao Início
+          <RotateCcw size={18} /> Reiniciar Processo
         </button>
       </div>
     );
@@ -346,130 +329,139 @@ const App: React.FC = () => {
 
   if (showEmailStep) {
     return (
-      <div className="min-h-screen bg-white flex flex-col p-6 max-w-md mx-auto">
+      <div className="h-screen h-[100dvh] bg-white flex flex-col p-6 max-w-md mx-auto overflow-hidden">
         <SkippLogo />
-        <div className="flex-1 flex flex-col justify-center -mt-6">
-          <h2 className="text-2xl font-bold text-center mb-2">Quase lá!</h2>
-          <p className="text-center text-[#6B6B6B] mb-8">
-            Informe onde deseja receber o seu checklist gratuito e as instruções para o seu guia.
+        <div className="flex-1 flex flex-col justify-center -mt-6 animate-fade-in overflow-y-auto no-scrollbar pb-6">
+          <div className="w-12 h-12 rounded-2xl bg-[#E9F8F5] flex items-center justify-center mb-4 shrink-0">
+            <Zap size={24} className="text-[#2FBBA8] fill-[#2FBBA8]" />
+          </div>
+          <h2 className="text-2xl font-black text-gray-900 mb-2">Onde enviamos o seu Guia?</h2>
+          <p className="text-sm text-[#6B6B6B] mb-8 leading-relaxed">
+            Informe seus dados para receber o checklist premium e começar a atrair mais clientes ainda hoje.
           </p>
           
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold mb-1 ml-1 text-[#0B0B0B]">Seu Nome (opcional)</label>
+            <div className="group">
+              <label className="block text-[10px] font-black uppercase tracking-widest mb-1.5 ml-1 text-gray-400 transition-colors group-focus-within:text-[#2FBBA8]">Seu Nome Completo</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Como quer ser chamado?"
-                className="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-[#2FBBA8] outline-none transition-colors"
+                className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-[#2FBBA8] outline-none transition-all shadow-sm ring-1 ring-gray-100 focus:ring-4 focus:ring-[#2FBBA8]/10 text-sm text-gray-900 font-medium"
               />
             </div>
-            <div>
-              <label className="block text-sm font-bold mb-1 ml-1 text-[#0B0B0B]">E-mail</label>
+            <div className="group">
+              <label className="block text-[10px] font-black uppercase tracking-widest mb-1.5 ml-1 text-gray-400 transition-colors group-focus-within:text-[#2FBBA8]">E-mail para recebimento</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu@email.com"
-                className="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-[#2FBBA8] outline-none transition-colors"
+                placeholder="seu@melhoremail.com"
+                className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-[#2FBBA8] outline-none transition-all shadow-sm ring-1 ring-gray-100 focus:ring-4 focus:ring-[#2FBBA8]/10 text-sm text-gray-900 font-medium"
               />
             </div>
           </div>
 
           <button
             onClick={submitLead}
-            disabled={isSubmitting}
-            className="w-full mt-10 py-4 px-6 rounded-full text-white font-bold shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70"
+            disabled={isSubmitting || !email}
+            className="w-full mt-8 py-4 px-8 rounded-2xl text-white font-black shadow-[0_15px_35px_rgba(47,187,168,0.4)] flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-70 disabled:grayscale shrink-0"
             style={{ backgroundColor: THEME.primary }}
           >
-            {isSubmitting ? <Loader2 className="animate-spin" /> : 'Finalizar e Receber Guia'}
+            {isSubmitting ? <Loader2 className="animate-spin" /> : <>Receber Guia Vitalício <ArrowRight size={18} /></>}
           </button>
           
-          {error && <p className="text-red-500 text-center mt-4 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-center mt-4 text-xs font-bold animate-shake">{error}</p>}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col max-w-md mx-auto relative overflow-x-hidden">
-      <div className="fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5] h-1.5 max-w-md mx-auto">
+    <div className="h-screen h-[100dvh] bg-white flex flex-col max-w-md mx-auto relative overflow-hidden selection:bg-[#2FBBA8]/30">
+      {/* Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gray-50 h-1.5 max-w-md mx-auto">
         <div 
-          className="h-full transition-all duration-500 ease-out"
+          className="h-full transition-all duration-700 ease-in-out relative"
           style={{ backgroundColor: THEME.primary, width: `${currentStep.progress}%` }}
-        />
+        >
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-white/20 blur-md animate-shimmer" />
+        </div>
       </div>
 
-      <main className="flex-1 pt-12 pb-24 px-6 flex flex-col items-center">
+      <main className="flex-1 pt-6 pb-20 px-6 sm:px-8 flex flex-col overflow-y-auto no-scrollbar">
         {currentStep.type !== 'intro' && <SkippLogo />}
 
-        <div className="w-full flex-1 animate-fade-in flex flex-col">
+        <div key={currentStepIndex} className="w-full flex-1 animate-fade-in flex flex-col">
           {currentStep.type === 'intro' ? (
             <div className="text-center pt-2">
-              <p className="text-sm text-[#6B6B6B] mb-6 leading-relaxed">
-                {currentStep.description}
-              </p>
-              <h1 className="text-3xl font-black text-[#0B0B0B] leading-tight mb-4 px-4">
+              <span className="inline-block px-3 py-1 bg-[#E9F8F5] text-[#2FBBA8] text-[9px] font-black uppercase tracking-[0.2em] rounded-full mb-4">
+                Insights Estratégicos
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-3 px-2">
                 {currentStep.title}
               </h1>
-              <p className="text-sm italic text-[#6B6B6B] mb-8">
-                {currentStep.subtitle}
+              <p className="text-sm text-gray-500 mb-6 leading-relaxed font-medium">
+                {currentStep.description}
               </p>
               
               <button
                 onClick={handleNext}
-                className="w-full py-5 rounded-xl text-white font-bold shadow-[0_8px_20px_rgba(47,187,168,0.3)] transition-transform active:scale-95 mb-10"
+                className="w-full py-4 rounded-2xl text-white font-black shadow-[0_12px_30px_rgba(47,187,168,0.35)] transition-all active:scale-95 mb-8 hover:brightness-110 flex items-center justify-center gap-2"
                 style={{ backgroundColor: THEME.primary }}
               >
-                Continuar
+                Começar agora <ArrowRight size={20} />
               </button>
 
               <BrowserMockup />
             </div>
           ) : (
-            <>
-              <h1 className="text-2xl font-bold text-center leading-tight mb-4 text-[#0B0B0B]">
+            <div className="flex flex-col flex-1">
+              <h1 className="text-xl sm:text-2xl font-black text-left leading-tight mb-2 text-gray-900">
                 {currentStep.title}
               </h1>
 
-              {currentStep.description && (
-                <p className="text-center text-[#6B6B6B] mb-8 text-sm px-4">
-                  {currentStep.description}
+              {currentStep.subtitle && (
+                <p className="text-left text-gray-500 mb-4 font-medium text-xs sm:text-sm leading-relaxed">
+                  {currentStep.subtitle}
                 </p>
               )}
 
-              {currentStep.subtitle && (
-                <h2 className="text-lg font-bold text-center mb-8 whitespace-pre-line text-[#0B0B0B]">
-                  {currentStep.subtitle}
-                </h2>
-              )}
-
               {currentStep.type === 'info' ? (
-                <div className="space-y-10">
+                <div className="space-y-6">
                   <HighFidelityComparison />
 
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-                    <div className="py-2.5 px-4 text-center text-white text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: THEME.primary }}>
-                      Oferta especial por tempo limitado:
+                  <div className="relative rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 group">
+                    <div className="py-2 px-4 text-center text-white text-[10px] font-black uppercase tracking-[0.15em]" style={{ backgroundColor: THEME.primary }}>
+                      OFERTA DE LANÇAMENTO EXCLUSIVA
                     </div>
-                    <div className="p-8 bg-white flex flex-col">
-                      <div className="flex justify-between items-center mb-8">
+                    <div className="p-6 bg-white flex flex-col">
+                      <div className="flex justify-between items-start mb-6">
                         <div>
-                          <h4 className="font-black text-xl text-[#0B0B0B]">Acesso Vitalício</h4>
-                          <p className="text-[11px] text-[#6B6B6B] mt-1">Checklist Premium + Guia de Execução</p>
+                          <h4 className="font-black text-xl text-gray-900 tracking-tight">Checklist Premium</h4>
+                          <p className="text-[10px] text-gray-400 mt-1 font-bold uppercase tracking-widest">Acesso Vitalício</p>
                         </div>
                         <div className="text-right">
-                          <span className="block text-[11px] text-red-500 line-through opacity-70">De 197,00</span>
+                          <span className="block text-[10px] text-red-500 line-through font-bold mb-0.5">R$ 197,00</span>
                           <span className="text-3xl font-black" style={{ color: THEME.primary }}>R$ 47,00</span>
                         </div>
                       </div>
+                      
+                      <div className="space-y-2 mb-6">
+                        {['Guia Prático em Vídeo', 'Checklist de Verificação', 'Dicas de Avaliações 5★'].map(b => (
+                          <div key={b} className="flex items-center gap-2 text-xs font-bold text-gray-600">
+                            <CheckCircle size={12} className="text-[#2FBBA8]" /> {b}
+                          </div>
+                        ))}
+                      </div>
+
                       <button 
                         onClick={handleNext}
-                        className="w-full py-5 rounded-full text-white font-bold shadow-lg transition-transform active:scale-95 hover:brightness-110"
+                        className="w-full py-4 rounded-2xl text-white font-black shadow-[0_20px_40px_rgba(47,187,168,0.3)] transition-all active:scale-95 hover:brightness-110 flex items-center justify-center gap-2"
                         style={{ backgroundColor: THEME.primary }}
                       >
-                        Desbloquear Guia Agora
+                        Desbloquear Agora <Zap size={18} fill="white" />
                       </button>
                     </div>
                   </div>
@@ -486,31 +478,21 @@ const App: React.FC = () => {
                         key={option.id}
                         onClick={() => handleSelect(option.id)}
                         className={`
-                          relative p-4 rounded-2xl text-left transition-all duration-200 shadow-sm border-2
+                          relative p-4 rounded-3xl text-left transition-all duration-300 border-[3px] group
                           ${isSelected 
-                            ? 'border-[#2FBBA8] bg-[#E9F8F5]' 
-                            : 'border-transparent bg-white shadow-sm ring-1 ring-gray-100'
+                            ? 'border-[#2FBBA8] bg-[#E9F8F5] shadow-[0_10px_25px_rgba(47,187,168,0.1)] translate-y-[-2px]' 
+                            : 'border-gray-50 bg-white hover:border-gray-100 hover:bg-gray-50/50 shadow-sm'
                           }
                         `}
                       >
                         <div className="flex items-center gap-3">
-                          {currentStep.type === 'radio' && !currentStep.gridCols && (
-                            <div className={`
-                              w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0
-                              ${isSelected ? 'border-[#2FBBA8]' : 'border-gray-200'}
-                            `}>
-                              {isSelected && <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: THEME.primary }} />}
-                            </div>
-                          )}
-                          {currentStep.type === 'checkbox' && (
-                            <div className={`
-                              w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0
-                              ${isSelected ? 'border-[#2FBBA8] bg-[#2FBBA8]' : 'border-gray-200'}
-                            `}>
-                              {isSelected && <CheckCircle2 size={14} color="white" />}
-                            </div>
-                          )}
-                          <span className="text-sm font-medium leading-snug text-[#0B0B0B]">
+                          <div className={`
+                            w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all
+                            ${isSelected ? 'border-[#2FBBA8] bg-[#2FBBA8]' : 'border-gray-200 bg-white group-hover:border-gray-300'}
+                          `}>
+                            {isSelected && <CheckCircle2 size={12} color="white" strokeWidth={3} />}
+                          </div>
+                          <span className={`text-xs sm:text-sm font-bold leading-tight transition-colors ${isSelected ? 'text-[#0B0B0B]' : 'text-gray-500'}`}>
                             {option.label}
                           </span>
                         </div>
@@ -524,53 +506,67 @@ const App: React.FC = () => {
                 <button
                   onClick={handleNext}
                   disabled={!isStepValid()}
-                  className="w-full mt-10 py-5 rounded-full text-white font-bold shadow-lg transition-transform active:scale-95 disabled:opacity-50"
+                  className="w-full mt-4 sm:mt-6 py-4 rounded-2xl text-white font-black shadow-[0_15px_35px_rgba(47,187,168,0.35)] transition-all active:scale-95 disabled:opacity-50 disabled:grayscale hover:brightness-110 flex items-center justify-center gap-2 shrink-0 mb-4"
                   style={{ backgroundColor: THEME.primary }}
                 >
-                  Continuar
+                  Continuar <ArrowRight size={18} />
                 </button>
               )}
-            </>
+            </div>
           )}
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-50 p-6 flex justify-between items-center z-40">
+      <footer className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/80 backdrop-blur-xl border-t border-gray-100 p-4 flex justify-between items-center z-40 px-8">
         <button 
           onClick={handleBack}
           disabled={currentStepIndex === 0}
-          className="text-[#0B0B0B] disabled:opacity-10 active:opacity-50 transition-opacity"
+          className="w-10 h-10 rounded-2xl flex items-center justify-center text-gray-900 bg-gray-50 border border-gray-100 disabled:opacity-30 active:scale-90 transition-all"
           aria-label="Voltar"
         >
-          <ChevronLeft size={32} strokeWidth={1.5} />
+          <ChevronLeft size={20} />
         </button>
 
-        <button 
-          onClick={handleNext}
-          disabled={!isStepValid() || currentStep.type === 'intro'}
-          className="text-[#0B0B0B] disabled:opacity-10 active:opacity-50 transition-opacity"
-          aria-label="Próximo"
-        >
-          <ChevronRight size={32} strokeWidth={1.5} />
-        </button>
+        <div className="flex gap-1.5">
+          {STEPS.map((s, idx) => (
+             <div 
+               key={idx} 
+               className={`h-1 rounded-full transition-all duration-300 ${idx === currentStepIndex ? 'w-5 bg-[#2FBBA8]' : 'w-1 bg-gray-200'}`} 
+             />
+          ))}
+        </div>
 
         <button 
           onClick={handleReset}
-          className="text-[#0B0B0B] active:opacity-50 transition-opacity"
+          className="w-10 h-10 rounded-2xl flex items-center justify-center text-gray-900 bg-gray-50 border border-gray-100 active:scale-90 transition-all hover:bg-red-50 hover:text-red-500 hover:border-red-100"
           aria-label="Reiniciar"
         >
-          <RotateCcw size={28} strokeWidth={1.5} />
+          <RotateCcw size={18} />
         </button>
       </footer>
 
       <style>{`
         @keyframes fade-in {
-          from { opacity: 0; transform: translateY(10px); }
+          from { opacity: 0; transform: translateY(8px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.4s ease-out forwards;
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-4px); }
+          75% { transform: translateX(4px); }
+        }
+        .animate-fade-in { animation: fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-up { animation: slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-shimmer { animation: shimmer 2s infinite linear; }
+        .animate-shake { animation: shake 0.3s ease-in-out; }
       `}</style>
     </div>
   );
