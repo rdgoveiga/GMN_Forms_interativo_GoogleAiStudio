@@ -2,10 +2,12 @@
 import { QuestionStep } from './types';
 
 export const THEME = {
-  primary: '#2FBBA8',
-  cardBg: '#E9F8F5',
+  primary: '#3B82F6',
+  secondary: '#A020F0',
+  cardBg: '#EFF6FF',
   textBlack: '#0B0B0B',
   textGray: '#6B6B6B',
+  brandGradient: 'linear-gradient(to right, #3B82F6, #A020F0)',
 };
 
 export const STEPS: QuestionStep[] = [
@@ -13,7 +15,7 @@ export const STEPS: QuestionStep[] = [
     id: 1,
     type: 'radio',
     progress: 10,
-    title: 'Coloque sua Empresa no topo do Google',
+    title: 'Coloque sua empresa no topo do Google',
     description: 'Responda algumas perguntas rápidas e receba um checklist pronto para aplicar hoje e começar a receber contatos de novos clientes todos os dias',
     subtitle: 'Você já usa o Perfil de Empresa no Google?\n(Google Meu Negócio)',
     options: [
@@ -25,7 +27,7 @@ export const STEPS: QuestionStep[] = [
     id: 2,
     type: 'radio',
     progress: 20,
-    title: 'Sua Empresa aparece nas buscas do Google quando alguém procura pelo seu produto/serviço?',
+    title: 'Sua empresa aparece nas buscas do Google quando alguém procura pelo seu produto/serviço?',
     options: [
       { id: 'topo', label: '🙌 Sim, entre os primeiros resultados (no topo)' },
       { id: 'demora', label: '😐 Aparece, mas demora (precisa rolar e procurar meu nome)' },
@@ -47,7 +49,7 @@ export const STEPS: QuestionStep[] = [
     id: 4,
     type: 'radio',
     progress: 40,
-    title: 'Quantas avaliações sua Empresa tem no Google?',
+    title: 'Quantas avaliações sua empresa tem no Google?',
     options: [
       { id: 'nenhuma', label: 'Nenhuma' },
       { id: '1_10', label: 'De 1 a 10' },
@@ -93,7 +95,7 @@ export const STEPS: QuestionStep[] = [
     title: 'Qual dessas metas você quer atingir ainda esse mês?',
     subtitle: 'Pode marcar mais de uma opção.',
     options: [
-      { id: 'meta_topo', label: 'Subir minha Empresa para o topo do Google' },
+      { id: 'meta_topo', label: 'Subir minha empresa para o topo do Google' },
       { id: 'meta_avaliacoes', label: 'Conseguir pelo menos 20 avaliações 5 estrelas' },
       { id: 'meta_pacientes', label: 'Atrair mais clientes da minha cidade' },
       { id: 'meta_presenca', label: 'Melhorar minha presença online' }
