@@ -6,9 +6,10 @@ import { FormData } from './types';
 
 const SUCCESS_GREEN = '#22C55E';
 const SUCCESS_TEAL = '#2FBBA8';
+const WHATSAPP_LINK = "https://wa.me/5521985899548";
 
 const SkippLogo = () => (
-  <div className="flex flex-col items-center justify-center mb-8 w-full max-w-[320px] mx-auto">
+  <div className="flex flex-col items-center justify-center mb-8 w-full max-w-[320px] mx-auto animate-fade-in">
     <div className="flex flex-col items-center gap-0">
       <div className="flex items-center leading-none">
         <span className="text-3xl font-black italic tracking-tighter" style={{ 
@@ -77,7 +78,7 @@ const TrustBadges = () => (
   <div className="flex justify-center gap-6 mb-12 opacity-60">
     <div className="flex items-center gap-1">
       <Shield size={16} style={{ color: SUCCESS_GREEN }} />
-      <span className="text-[9px] font-black text-gray-500 leading-tight uppercase">Compra<br/>100% segura</span>
+      <span className="text-[9px] font-black text-gray-500 Birding-tight uppercase">Compra<br/>100% segura</span>
     </div>
     <div className="flex items-center gap-1">
       <Lock size={16} style={{ color: SUCCESS_GREEN }} />
@@ -207,12 +208,15 @@ const SalesPage = ({ onReset }: { onReset: () => void }) => {
 
       <OfferBox />
 
-      <button 
+      <a 
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
         className="w-full max-w-sm py-6 rounded-[2rem] text-white font-black text-lg shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 mb-6 animate-pulse-cta"
-        style={{ background: SUCCESS_GREEN }}
+        style={{ background: SUCCESS_GREEN, textDecoration: 'none' }}
       >
         GARANTIR MEU ACESSO AGORA
-      </button>
+      </a>
 
       <TrustBadges />
 
@@ -343,13 +347,15 @@ const App: React.FC = () => {
                   
                   <OfferBox />
                   
-                  <button 
-                    onClick={handleNext}
+                  <a 
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full max-w-sm py-6 rounded-[2rem] text-white font-black text-lg shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 mb-6 animate-pulse-cta"
-                    style={{ background: SUCCESS_GREEN }}
+                    style={{ background: SUCCESS_GREEN, textDecoration: 'none' }}
                   >
                     GARANTIR MEU ACESSO AGORA
-                  </button>
+                  </a>
                   
                   <TrustBadges />
                   
